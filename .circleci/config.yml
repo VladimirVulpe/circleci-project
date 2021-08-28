@@ -12,6 +12,9 @@ jobs:
       - run:
           name: Install node_modules with npm
           command: npm install
+      - run: 
+          name: Install karma-firefox-launcher
+          command: npm install karma-firefox-launcher --save-dev
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
