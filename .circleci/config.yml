@@ -26,4 +26,4 @@ jobs:
       #       NG_CLI_ANALYTICS:ci
       - run: 
           name: Running unit tests with karma
-          command: sudo npm run test -- --no-watch --no-progress --browsers=ChromeHeadless
+          command: sudo npm run test -- --no-watch --no-progress --browsers=Firefox
