@@ -9,4 +9,16 @@ jobs:
     steps:
       - checkout # check out the code in the project directory
       - run: echo "hello world" # run the `echo` command
-      - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless
+      - run:
+          name: Install node_modules with npm
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+              - ./node_modules
+      - run:
+          name: Install angularcli
+          command: sudo npm install -g @angular/cli@latest
+      - run: 
+        - name: Running unit tests with karma
+        - command: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless
