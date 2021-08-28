@@ -1,17 +1,24 @@
-version: '2.1'
-orbs:
-  node: circleci/node@4.7.0
+version: 2.1
 jobs:
-  test:
-    executor:
-      name: node/default
-      tag: '13.14'
+  build:
+    docker:
+      - image: cimg/node:14.10.1 # the primary container, where your job's commands are run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - checkout
-      - node/install-packages
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
       - run:
-          command: npm run test
-workflows:
-  test_my_app:
-    jobs:
-      - test
+          name: Install node_modules with npm
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+              - ./node_modules
+      - run:
+          name: Install angularcli
+          command: sudo npm install -g @angular/cli@latest
+      - run: 
+        - name: Running unit tests with karma
+        - command: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless
