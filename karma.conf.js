@@ -1,5 +1,6 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
+process.env.CHROME_BIN = require('puppeteer').executablePath()
 
 module.exports = function (config) {
   config.set({
@@ -37,13 +38,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome', 'Chrome_without_security'],
-    customLaunchers: {
-      Chrome_without_security: {
-        base: 'Chrome',
-        flags: ['--disable-web-security', '--disable-site-isolation-trials']
-      }
-    },
+    browsers: ['ChromeHeadless'],
     singleRun: false,
     restartOnFileChange: true
   });

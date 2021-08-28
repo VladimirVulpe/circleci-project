@@ -11,12 +11,15 @@ jobs:
       - run:
           name: Install node_modules with npm
           command: npm install
+      - run:
+          name: Install puppeteer and karma-chrome-launcher
+          command: npm i -D puppeteer karma-chrome-launcher
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
               - ./node_modules
       - run: 
           name: Running unit tests with karma
-          command: sudo npm run test -- --no-watch --no-progress --browsers=Chrome_without_security
+          command: sudo npm run test -- --no-watch --no-progress --browsers=ChromeHeadless
           environment:
             CHROME_BIN: /usr/bin/chromium
