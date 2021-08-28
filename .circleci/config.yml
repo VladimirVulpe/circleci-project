@@ -11,6 +11,9 @@ jobs:
       - run:
           name: Install node_modules with npm
           command: npm install
+      - run:
+          name: Install karma and karma-chrome-launcher with npm
+          command: npm i --save-dev karma karma-chrome-launcher karma-mocha karma-chai && npm i --save-dev mocha chai
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
