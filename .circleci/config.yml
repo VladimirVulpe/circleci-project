@@ -17,6 +17,6 @@ jobs:
               - ./node_modules
       - run: 
           name: Running unit tests with karma
-          command: sudo npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+          command: sudo npm run test -- --no-watch --no-progress --browsers=Chrome_without_security
           environment:
             CHROME_BIN: /usr/bin/chromium

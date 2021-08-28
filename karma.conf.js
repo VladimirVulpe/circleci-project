@@ -37,13 +37,13 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['chromium-browser'],
+    browsers: ['Chrome', 'Chrome_without_security'],
     customLaunchers: {
-      ChromeHeadlessCI: {
-          base: 'ChromeHeadless',
-          flags: ['--no-sandbox']
+      Chrome_without_security: {
+        base: 'Chrome',
+        flags: ['--disable-web-security', '--disable-site-isolation-trials']
       }
-  },
+    },
     singleRun: false,
     restartOnFileChange: true
   });
