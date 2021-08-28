@@ -8,7 +8,6 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout # check out the code in the project directory
-      - run: echo "hello world" # run the `echo` command
       - run:
           name: Install node_modules with npm
           command: npm install
@@ -17,7 +16,7 @@ jobs:
           command: npm install karma-firefox-launcher --save-dev
       - run: 
           name: Install karma-firefox-launcher
-          command: npm install -g karma-cli
+          command: sudo npm install -g karma-cli
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
