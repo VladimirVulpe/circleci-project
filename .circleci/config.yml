@@ -16,7 +16,7 @@ jobs:
           command: npm install karma-firefox-launcher --save-dev
       - run: 
           name: Install karma-firefox-launcher
-          command: sudo npm install -g karma-cli
+          command: sudo npm install -g karma-coverage-istanbul-reporter -y
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
