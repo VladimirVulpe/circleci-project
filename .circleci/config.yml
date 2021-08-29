@@ -12,7 +12,7 @@ jobs:
           key: circleci-project-{{ .Branch }}-{{ checksum "package-lock.json" }}
       - run:
           name: Install node_modules with npm
-          command: npm install && npm i -D puppeteer karma-chrome-launcher
+          command: npm install
       - save_cache:
           key: circleci-project-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
@@ -23,3 +23,5 @@ jobs:
       - run: 
           name: Running unit tests with karma
           command: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --code-coverage
+      - store_test_results:
+          path: testresults
