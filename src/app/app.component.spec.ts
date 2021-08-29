@@ -34,13 +34,6 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('.content span')?.textContent).toContain('circleci-project app is running!');
   });
 
-  // it('should change text on button click', () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   fixture.detectChanges();
-  //   const compiled = fixture.nativeElement as HTMLElement;
-  //   expect(compiled.querySelector('.content span')?.textContent).toContain('Good morning and hello world!');
-  // });
-
   it('should have this initial text before button click', () => {
     
     const fixture = TestBed.createComponent(AppComponent);
@@ -55,11 +48,13 @@ describe('AppComponent', () => {
     let component = fixture.componentInstance;
     let buttonElement = fixture.debugElement.nativeElement.querySelector('button');
     let label = fixture.debugElement.nativeElement.querySelector('label');
+    const expectedResult = 'Good morning and hello world!';
 
     spyOn(component, 'setButtonText');
-    spyOnProperty(component, "btnVal", "get").and.returnValue('Good morning and hello world!');
+    spyOnProperty(component, "btnVal", "get").and.returnValue(expectedResult);
+
     //Trigger click event after spyOn
-    buttonElement.click('Good morning and hello world!');
+    buttonElement.click();
 
     fixture.detectChanges();
 
@@ -67,9 +62,9 @@ describe('AppComponent', () => {
       expect(component.setButtonText).toHaveBeenCalled();
 
       const compiled = fixture.nativeElement as HTMLElement;
-      expect(compiled.querySelector('[aria-label="Message Body"]')?.textContent?.trim()).toEqual('Good morning and hello world!');
-      expect(component.btnVal.trim()).toEqual('Good morning and hello world!');
-      expect(label.textContent.trim()).toEqual('Good morning and hello world!');
+      expect(compiled.querySelector('[aria-label="Message Body"]')?.textContent?.trim()).toEqual(expectedResult);
+      expect(component.btnVal.trim()).toEqual(expectedResult);
+      expect(label.textContent.trim()).toEqual(expectedResult);
     });
   })); 
 });
