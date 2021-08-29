@@ -19,6 +19,11 @@ jobs:
           paths:
               - ./node_modules
       - run: 
+          name: Build
+          command: npm run build --prod 
+          environment:
+            CHROME_BIN: /usr/bin/chromium        
+      - run: 
           name: Running unit tests with karma
           command: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless 
           environment:
