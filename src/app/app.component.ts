@@ -9,9 +9,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'circleci-project';
-  btnVal = 'hello world'
+  _btnVal = 'hello world'
 
   public setButtonText(newTitle: string) {
-    this.btnVal = newTitle;
+    this._btnVal = newTitle;
   }
+
+  public get btnVal() {
+    return this._btnVal;  
+}
 }
