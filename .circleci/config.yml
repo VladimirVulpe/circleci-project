@@ -37,6 +37,3 @@ workflows:
           filters:
             branches:
               only: master # only run deploy-via-git job on master branch
-          environment:
-            HEROKU_API_KEY: 4793e9e6-d9fb-4e7e-a44a-b81b2e6397d3
-          
