@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  heroku: circleci/heroku@1.2.6
 jobs:
   build:
     docker:
@@ -25,15 +27,13 @@ jobs:
           command: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --code-coverage
       - store_test_results:
           path: testresults
-  deploy:
-     docker:
-       - image: cimg/node:14.17.5-browsers
-         auth:
-           username: mydockerhub-user
-           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-     steps:
-       - checkout
-       - run:
-           name: Deploy Master to Heroku
-           command: |
-             git push https://heroku:4793e9e6-d9fb-4e7e-a44a-b81b2e6397d3@git.heroku.com/rocky-bayou-53751.git master
+workflows:
+  heroku_deploy:
+    jobs:
+      - build
+      - heroku/deploy-via-git:
+          requires:
+            - build # only run deploy-via-git job if the build job has completed
+          filters:
+            branches:
+              only: master # only run deploy-via-git job on master branch
